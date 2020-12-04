@@ -1,0 +1,26 @@
+CREATE DATABASE  IF NOT EXISTS `cybercatalog`  DEFAULT CHARACTER SET utf8 collate utf8_general_ci;
+USE `cybercatalog`;
+
+
+
+CREATE TABLE `catalog_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_catalog` varchar(100) NOT NULL,
+  `name_catalog` varchar(100) NOT NULL,
+  `descript` varchar(255) ,
+  `created_date` datetime NOT NULL,
+  `updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+CREATE TABLE `catalog_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_catalog` varchar(100) NOT NULL,
+  `id_group` int(11) NOT NULL,
+  `item` varchar(100) ,
+  `id_parent` datetime NOT NULL,
+  `updated_date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`id_group`) REFERENCES catalog_group(`id`)
+) ;
