@@ -25,37 +25,32 @@ public class CatalogItem implements Serializable {
 
 	@Column(nullable = false, length = 100, name = "id_catalog")
 	private String idCatalog;
+	
+	@Column(nullable = false, length = 100, name = "name_item")
+	private String nameItem;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_group", referencedColumnName = "id")
-	private CatalogGroup id_group;
+	private CatalogGroup idGroup;
 
 	@Column(nullable = false, name = "item")
 	private int item;
 
 	@Column(nullable = false, name = "id_parent")
-	private int id_parent;
+	private int idParent;
+	
+	@Column(nullable = true, length = 255, name = "note")
+	private String note;
 
-	@Column(nullable = false, name = "created_date")
+
+	@Column(nullable = true, name = "created_date")
 	private Date createdDate;
 
-	@Column(nullable = false, name = "updated_date")
+	@Column(nullable = true, name = "updated_date")
 	private Date updatedDate;
 
 	public CatalogItem() {
 		super();
-	}
-
-	public CatalogItem(long id, String idCatalog, CatalogGroup id_group, int item, int id_parent, Date createdDate,
-			Date updatedDate) {
-		super();
-		this.id = id;
-		this.idCatalog = idCatalog;
-		this.id_group = id_group;
-		this.item = item;
-		this.id_parent = id_parent;
-		this.createdDate = createdDate;
-		this.updatedDate = updatedDate;
 	}
 
 	public long getId() {
@@ -74,12 +69,20 @@ public class CatalogItem implements Serializable {
 		this.idCatalog = idCatalog;
 	}
 
-	public CatalogGroup getId_group() {
-		return id_group;
+	public String getNameItem() {
+		return nameItem;
 	}
 
-	public void setId_group(CatalogGroup id_group) {
-		this.id_group = id_group;
+	public void setNameItem(String nameItem) {
+		this.nameItem = nameItem;
+	}
+
+	public CatalogGroup getIdGroup() {
+		return idGroup;
+	}
+
+	public void setIdGroup(CatalogGroup idGroup) {
+		this.idGroup = idGroup;
 	}
 
 	public int getItem() {
@@ -90,12 +93,20 @@ public class CatalogItem implements Serializable {
 		this.item = item;
 	}
 
-	public int getId_parent() {
-		return id_parent;
+	public int getIdParent() {
+		return idParent;
 	}
 
-	public void setId_parent(int id_parent) {
-		this.id_parent = id_parent;
+	public void setIdParent(int idParent) {
+		this.idParent = idParent;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
 	}
 
 	public Date getCreatedDate() {
@@ -120,9 +131,16 @@ public class CatalogItem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CatalogItem [id=" + id + ", idCatalog=" + idCatalog + ", id_group=" + id_group + ", item=" + item
-				+ ", id_parent=" + id_parent + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+		return "CatalogItem [id=" + id + ", idCatalog=" + idCatalog + ", nameItem=" + nameItem + ", idGroup=" + idGroup
+				+ ", item=" + item + ", idParent=" + idParent + ", note=" + note + ", createdDate=" + createdDate
+				+ ", updatedDate=" + updatedDate + "]";
 	}
+	
+	
+	
+
+	
+	
 	
 	
 

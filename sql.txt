@@ -1,26 +1,142 @@
 CREATE DATABASE  IF NOT EXISTS `cybercatalog`  DEFAULT CHARACTER SET utf8 collate utf8_general_ci;
 USE `cybercatalog`;
 
-
-
 CREATE TABLE `catalog_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_catalog` varchar(100) NOT NULL,
   `name_catalog` varchar(100) NOT NULL,
   `descript` varchar(255) ,
-  `created_date` datetime NOT NULL,
-  `updated_date` datetime NOT NULL,
+  `created_date` datetime,
+  `updated_date` datetime,
   PRIMARY KEY (`id`)
 );
-
 
 CREATE TABLE `catalog_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_catalog` varchar(100) NOT NULL,
+  `name_item` varchar(100) NOT NULL,
   `id_group` int(11) NOT NULL,
   `item` varchar(100) ,
-  `id_parent` datetime NOT NULL,
-  `updated_date` datetime NOT NULL,
+  `id_parent` int(11) NOT NULL,
+  `note` varchar(255),
+  `created_date` datetime,
+  `updated_date` datetime,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`id_group`) REFERENCES catalog_group(`id`)
 ) ;
+
+ insert into cybercatalog.catalog_group(id_catalog,name_catalog,created_date) values ('TT','Tỉnh thành',curdate());
+ 
+ select * from cybercatalog.catalog_group;
+ select * from cybercatalog.catalog_item;
+--  ================== Cac thành phố =======================
+
+insert into 
+cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('HN','Hà Nội',1,0,0,curdate(),'Hà Nội');
+
+insert into 
+cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('TPHCM','Hồ Chí Minh',1,0,0,curdate(),'Tp Hồ Chí Minh');
+
+insert into 
+cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('DN','Đà Nẵng',1,0,0,curdate(),'Đà Nẵng');
+
+insert into 
+cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('BN','Bắc Ninh',1,0,0,curdate(),'Bắc Ninh');
+
+insert into 
+cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('BG','Bắc Giang',1,0,0,curdate(),'Bắc Giang');
+
+insert into 
+cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('HN','Hà Nam',1,0,0,curdate(),'Hà Nam');
+
+
+insert into 
+cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('NĐ','Nam Định',1,0,0,curdate(),'Nam Định');
+
+
+
+
+
+
+
+-- ========== các quận nằm trong thành phố Hà Nội ====================-- 
+insert into cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('BD','Ba Đình',1,1,1,curdate(),'Ba Đình nằm trong tp Hà Nội');
+
+insert into cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note) 
+values ('CG','Cầu Giấy',1,1,1,curdate(),'Cầu Giấy nằm trong tp Hà Nội');
+
+
+-- ========== các phường nằm trong quận Ba Đình ====================-- 
+insert into cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note)
+ values ('DC','Đội Cấn',1,2,2,curdate(),'phường Đội Cấn nằm trong quận Ba Đình thành phố Hà Nội');
+ 
+ insert into cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note)
+ values ('KM','Kim Mã',1,2,2,curdate(),'phường Kim Mã nằm trong quận Ba Đình thành phố Hà Nội');
+ 
+ insert into cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note)
+ values ('GV','Giảng Võ',1,2,2,curdate(),'phường Đội Cấn nằm trong quận Ba Đình thành phố Hà Nội');
+ 
+ 
+ -- ========== các phường nằm trong quận Ba Đình ====================-- 
+insert into cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note)
+ values ('DV','Dịch Vọng',1,2,6,curdate(),'phường Dịch Vọng nằm trong quận Cầu Giấy thành phố Hà Nội');
+ 
+ insert into cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note)
+ values ('NĐ','Nghĩa Đô',1,2,6,curdate(),'phường Nghĩa Đô nằm trong quận Cầu Giấy thành phố Hà Nội');
+ 
+ insert into cybercatalog.catalog_item(id_catalog,name_item,id_group,item,id_parent,created_date,note)
+ values ('QH','Quan Hoa',1,2,6,curdate(),'phường Quan Hoa nằm trong quận Cầu Giấy thành phố Hà Nội');
+ 
+ 
+ select name_item from cybercatalog.catalog_item where catalog_item.id_group=1 and item =0 and id_parent=0;
+ 
+ select x.id from cybercatalog.catalog_item x where x.id_group = 1 and x.id_parent = 0 and x.name_item = 'Hà Nội' ;
+ 
+ select x.name_item from cybercatalog.catalog_item x 
+ where x.id_group = 1  and x.id_parent = 
+ (select y.id from cybercatalog.catalog_item y where y.id_group = 1 and y.id_parent = 0 and y.name_item = 'Hà Nội' );
+ 
+ 
+
+ select * from cybercatalog.catalog_item;
+
+
+select x.name_item from cybercatalog.catalog_item x 
+ where x.id_group = 1  and x.id_parent = 
+(select y.id from cybercatalog.catalog_item y where y.id_group = 1 and y.item = 1 and y.name_item = 'Ba Đình' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -26,13 +26,13 @@ public class CatalogGroup implements Serializable {
 	@Column(nullable = false, length = 100, name = "name_catalog")
 	private String name_catalog;
 
-	@Column(nullable = false, length = 255, name = "descript")
+	@Column(nullable = true, length = 255, name = "descript")
 	private String descript;
 
-	@Column(nullable = false, name = "created_date")
+	@Column(nullable = true, name = "created_date")
 	private Date created_date;
 
-	@Column(nullable = false, name = "updated_date")
+	@Column(nullable = true, name = "updated_date")
 	private Date updatedDate;
 
 	public CatalogGroup() {
